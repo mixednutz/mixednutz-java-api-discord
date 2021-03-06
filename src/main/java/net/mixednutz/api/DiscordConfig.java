@@ -26,6 +26,11 @@ public class DiscordConfig {
 		return new DiscordProvider(discordConnectionFactory(), discord.defaultChannelId);
 	}
 	
+	@Bean
+	public CredentialsInterceptor<DiscordApi, IOauth1Credentials> discordCredentialsInterceptor(CredentialsCallback callback) {
+		return new DiscordCredentialsInterceptor(callback);
+	}
+	
 	public DiscordConnectionProperties getDiscord() {
 		return discord;
 	}
