@@ -23,6 +23,10 @@ public class MessageForm implements IPost {
 	@Override
 	public void setTags(String[] tags) {
 	}
+	
+	public void setComposeBody(String text) {
+		setText(text);
+	}
 
 	@Override
 	public void setText(String text) {
