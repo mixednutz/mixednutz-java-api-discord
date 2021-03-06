@@ -67,7 +67,7 @@
 		<mixednutz-api.version>2.0.0</mixednutz-api.version>
 		<mixednutz-api-core.version>2.0.0</mixednutz-api-core.version>
 		<spring-social.version>1.1.6.RELEASE</spring-social.version>
-		<discord4j.version>3.1.1</discord4j.version>
+		<javacord.version>3.1.2</javacord.version>
 	
 	</properties>
 
@@ -161,7 +161,7 @@
 		<dependency>
 		    <groupId>org.javacord</groupId>
 		    <artifactId>javacord</artifactId>
-		    <version>3.1.2</version>
+		    <version>${javacord.version}</version>
 		    <type>pom</type>
 		</dependency>
 		
@@ -181,22 +181,4 @@
 		
 	</dependencies>
 
-	<dependencyManagement>
-		<dependencies>
-			<!-- <dependency>
-				<groupId>io.projectreactor</groupId>
-				<artifactId>reactor-core</artifactId>
-				<version>3.3.12.RELEASE</version>
-			</dependency>
-			<dependency>
-				<groupId>io.netty</groupId>
-				<artifactId>netty-handler</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>io.projectreactor.addons</groupId>
-				<artifactId>reactor-extra</artifactId>
-				<version>3.3.4.RELEASE</version>
-			</dependency> -->
-		</dependencies>
-	</dependencyManagement>
 </project>
