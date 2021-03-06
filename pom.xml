@@ -30,7 +30,7 @@
 		<connection>scm:git:ssh://git@github.com/mixednutz/mixednutz-java-api-discord.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/mixednutz/mixednutz-java-api-discord.git</developerConnection>
 		<url>https://github.com/mixednutz/mixednutz-java-api-discord</url>
-		<tag>HEAD</tag>
+		<tag>2.0.x</tag>
     </scm>
 	
 	<!-- 
