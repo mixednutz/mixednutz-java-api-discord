@@ -26,6 +26,10 @@ public class DiscordConnectionFactory extends ConnectionFactory<DiscordApi> {
 				this.getApiAdapter());
 	}
 	
+	public void destroyConnection(Connection<DiscordApi> conn) {
+		conn.getApi().disconnect();
+	}
+	
 	static class DiscordConnection extends AbstractConnection<DiscordApi> {
 
 		/**
