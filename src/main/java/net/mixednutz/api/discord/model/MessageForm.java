@@ -5,6 +5,7 @@ import net.mixednutz.api.model.IPost;
 public class MessageForm implements IPost {
 	
 	Long channelId;
+	String channelIdAsString;
 	
 	//Tweet Builder
 	String textPart;
@@ -44,6 +45,14 @@ public class MessageForm implements IPost {
 
 	public Long getChannelId() {
 		return channelId;
+	}
+
+	public String getChannelIdAsString() {
+		return channelIdAsString;
+	}
+
+	public void setChannelIdAsString(String channelIdAsString) {
+		this.channelIdAsString = channelIdAsString;
 	}
 
 }

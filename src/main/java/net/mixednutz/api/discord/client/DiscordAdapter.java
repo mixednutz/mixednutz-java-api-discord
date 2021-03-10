@@ -1,7 +1,7 @@
 package net.mixednutz.api.discord.client;
 
-import org.javacord.api.DiscordApi;
-import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionData;
+import org.springframework.social.javacord.connect.DiscordConnectionFactory;
 
 import net.mixednutz.api.client.GroupClient;
 import net.mixednutz.api.client.MixednutzClient;
@@ -10,16 +10,15 @@ import net.mixednutz.api.client.TimelineClient;
 import net.mixednutz.api.client.UserClient;
 import net.mixednutz.api.discord.model.MessageForm;
 
-public class DiscordAdapter implements MixednutzClient {
+public class DiscordAdapter extends BaseDiscordAdapter implements MixednutzClient {
 	
-	private Connection<DiscordApi> conn;
 	private Long defaultChannelId;
 	
 	private MessageAdapter messageAdapter;
 
-	public DiscordAdapter(Connection<DiscordApi> conn, Long defaultChannelId) {
-		super();
-		this.conn = conn;
+	public DiscordAdapter(DiscordConnectionFactory connectionFactory, 
+			ConnectionData connectionData, Long defaultChannelId) {
+		super(connectionFactory, connectionData);
 		this.defaultChannelId = defaultChannelId;
 		initSubApis();
 	}
@@ -48,7 +47,8 @@ public class DiscordAdapter implements MixednutzClient {
 	}
 	
 	private void initSubApis() {
-		messageAdapter = new MessageAdapter(conn, defaultChannelId);
+		messageAdapter = new MessageAdapter(connectionFactory, connectionData, 
+				defaultChannelId);
 	}
 
 }

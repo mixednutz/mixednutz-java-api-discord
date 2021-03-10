@@ -1,20 +1,26 @@
 package net.mixednutz.api.discord.client;
 
-import org.javacord.api.DiscordApi;
-import org.javacord.api.entity.channel.Channel;
-import org.springframework.social.connect.Connection;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.javacord.api.entity.channel.ChannelType;
+import org.javacord.api.entity.channel.TextChannel;
+import org.springframework.social.connect.ConnectionData;
+import org.springframework.social.javacord.connect.DiscordConnectionFactory;
 
 import net.mixednutz.api.client.PostClient;
+import net.mixednutz.api.discord.model.DiscordChannel;
 import net.mixednutz.api.discord.model.MessageForm;
 
-public class MessageAdapter implements PostClient<MessageForm> {
+public class MessageAdapter extends BaseDiscordAdapter implements PostClient<MessageForm> {
 	
-	private Connection<DiscordApi> conn;
 	private Long defaultChannelId;
 
-	public MessageAdapter(Connection<DiscordApi> conn, Long defaultChannelId) {
-		super();
-		this.conn = conn;
+	public MessageAdapter(DiscordConnectionFactory connectionFactory, 
+			ConnectionData connectionData, Long defaultChannelId) {
+		super(connectionFactory, connectionData);
 		this.defaultChannelId = defaultChannelId;
 	}
 
@@ -25,11 +31,33 @@ public class MessageAdapter implements PostClient<MessageForm> {
 
 	@Override
 	public void postToTimeline(MessageForm post) {
-		Channel channel = conn.getApi().getChannelById(
-				post.getChannelId()!=null?post.getChannelId():defaultChannelId)
-				.orElseThrow(()->new IllegalArgumentException("Channel not found"));
-		
-		channel.asTextChannel().get().sendMessage(post.toContent());
+		acceptWithApi((api)->{	
+			long channelId = post.getChannelId()!=null ? post.getChannelId() : 
+				post.getChannelIdAsString()!=null ? Long.parseLong(post.getChannelIdAsString()) : 
+						defaultChannelId;
+			TextChannel channel = api.getTextChannelById(
+					channelId)
+					.orElseThrow(()->new IllegalArgumentException("Channel "+channelId+" not found"));
+			channel.asTextChannel().get().sendMessage(post.toContent());
+		});
+	}
+	
+	public Collection<DiscordChannel> getPostableChannels() {
+		return this.applyWithApi((api)->{
+			return api.getServerChannels().stream()
+					//Text Channels
+					.filter(c->ChannelType.SERVER_TEXT_CHANNEL.equals(c.getType()))
+					//Bot has permission to post
+					.filter(c->c.asTextChannel().get().canYouWrite())
+					//convert to custom class
+					.map(c->new DiscordChannel(c))
+					.collect(Collectors.toList());
+		});
+	}
+
+	@Override
+	public Map<String, Object> referenceDataForPosting() {
+		return Collections.singletonMap("channels", getPostableChannels());
 	}
 
 }

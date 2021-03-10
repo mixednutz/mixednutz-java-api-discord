@@ -3,7 +3,7 @@ package net.mixednutz.api.discord.provider;
 import org.javacord.api.DiscordApi;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
-import org.springframework.social.connect.ConnectionFactory;
+import org.springframework.social.javacord.connect.DiscordConnectionFactory;
 
 import net.mixednutz.api.core.provider.AbstractApiProvider;
 import net.mixednutz.api.discord.DiscordFeedType;
@@ -13,10 +13,10 @@ import net.mixednutz.api.provider.IOauth1Credentials;
 
 public class DiscordProvider extends AbstractApiProvider<DiscordAdapter, IOauth1Credentials> {
 
-	private ConnectionFactory<DiscordApi> connectionFactory;
+	private DiscordConnectionFactory connectionFactory;
 	private Long defaultChannelId;
 	
-	public DiscordProvider(ConnectionFactory<DiscordApi> connectionFactory, Long defaultChannelId) {
+	public DiscordProvider(DiscordConnectionFactory connectionFactory, Long defaultChannelId) {
 		super(DiscordAdapter.class, IOauth1Credentials.class);
 		this.connectionFactory = connectionFactory;
 		this.defaultChannelId = defaultChannelId;
@@ -25,8 +25,7 @@ public class DiscordProvider extends AbstractApiProvider<DiscordAdapter, IOauth1
 	@Override
 	public DiscordAdapter getApi(IOauth1Credentials creds) {
 		return new DiscordAdapter(
-				createConnection(
-						createConnectionData(creds)), defaultChannelId);
+				connectionFactory, createConnectionData(creds), defaultChannelId);
 	}
 	
 	protected ConnectionData createConnectionData(IOauth1Credentials creds) {
