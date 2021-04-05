@@ -1,4 +1,4 @@
-package net.mixednutz.app.server.controller;
+package net.mixednutz.discord.controller;
 
 import java.util.Collections;
 import java.util.List;
