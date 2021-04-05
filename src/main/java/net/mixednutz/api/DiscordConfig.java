@@ -3,7 +3,9 @@ package net.mixednutz.api;
 import org.javacord.api.DiscordApi;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.social.connect.web.CredentialsCallback;
 import org.springframework.social.connect.web.CredentialsInterceptor;
 import org.springframework.social.javacord.connect.DiscordConnectionFactory;
@@ -11,8 +13,10 @@ import org.springframework.social.javacord.connect.DiscordConnectionFactory;
 import net.mixednutz.api.discord.provider.DiscordProvider;
 import net.mixednutz.api.provider.IOauth1Credentials;
 
+@Profile("discord")
 @Configuration
 @ConfigurationProperties(prefix="mixednutz.social")
+@ComponentScan("net.mixednutz.discord")
 public class DiscordConfig {
 	
 	private DiscordConnectionProperties discord = new DiscordConnectionProperties();
