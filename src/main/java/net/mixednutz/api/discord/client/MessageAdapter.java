@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 import org.javacord.api.entity.channel.ChannelType;
 import org.javacord.api.entity.channel.TextChannel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.social.connect.ConnectionData;
 import org.springframework.social.javacord.connect.DiscordConnectionFactory;
 
@@ -17,6 +19,8 @@ import net.mixednutz.api.discord.model.MessageForm;
 public class MessageAdapter extends BaseDiscordAdapter implements PostClient<MessageForm> {
 	
 	private Long defaultChannelId;
+	
+	private static final Logger log = LoggerFactory.getLogger(MessageAdapter.class);
 
 	public MessageAdapter(DiscordConnectionFactory connectionFactory, 
 			ConnectionData connectionData, Long defaultChannelId) {
@@ -38,7 +42,18 @@ public class MessageAdapter extends BaseDiscordAdapter implements PostClient<Mes
 			TextChannel channel = api.getTextChannelById(
 					channelId)
 					.orElseThrow(()->new IllegalArgumentException("Channel "+channelId+" not found"));
-			channel.asTextChannel().get().sendMessage(post.toContent());
+			try {
+				channel.asTextChannel().get().sendMessage(post.toContent())
+					.thenAccept((msg)->{
+						log.info("Sent message: ID:{}; Timestamp:{}; Channel:{}; Content:{}", 
+								msg.getIdAsString(), 
+								msg.getCreationTimestamp(),
+								msg.getChannel().getIdAsString(),
+								msg.getContent());
+					}).get();
+			} catch (Exception e) {
+				log.error("Error sending message to Discord", e);
+			} 
 		});
 	}
 	
