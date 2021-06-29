@@ -1,5 +1,7 @@
 package net.mixednutz.api.discord.model;
 
+import java.io.Serializable;
+
 import net.mixednutz.api.model.IPost;
 
 public class MessageForm implements IPost {
@@ -53,6 +55,12 @@ public class MessageForm implements IPost {
 
 	public void setChannelIdAsString(String channelIdAsString) {
 		this.channelIdAsString = channelIdAsString;
+	}
+
+	@Override
+	public void setInReplyTo(Serializable inReplyToId) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
