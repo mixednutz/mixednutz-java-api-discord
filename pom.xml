@@ -66,7 +66,7 @@
 		
 		<mixednutz-api-core.version>2.1.0</mixednutz-api-core.version>
 		<spring-social.version>1.1.6.RELEASE</spring-social.version>
-		<javacord.version>3.1.2</javacord.version>
+		<javacord.version>3.7.0</javacord.version>
 	
 	</properties>
 
