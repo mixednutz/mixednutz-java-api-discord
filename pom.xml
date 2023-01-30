@@ -4,7 +4,7 @@
 	
 	<groupId>net.mixednutz</groupId>
 	<artifactId>mixednutz-java-api-discord</artifactId>
-	<version>2.1.0</version>
+	<version>2.1.1</version>
 	<packaging>jar</packaging>
 
 	<name>MixedNutz Java API Discord Apapter</name>
@@ -30,7 +30,7 @@
 		<connection>scm:git:ssh://git@github.com/mixednutz/mixednutz-java-api-discord.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/mixednutz/mixednutz-java-api-discord.git</developerConnection>
 		<url>https://github.com/mixednutz/mixednutz-java-api-discord</url>
-		<tag>mixednutz-java-api-discord-2.1.0</tag>
+		<tag>mixednutz-java-api-discord-2.1.1</tag>
     </scm>
 	
 	<!-- 
@@ -66,7 +66,7 @@
 		
 		<mixednutz-api-core.version>2.1.0</mixednutz-api-core.version>
 		<spring-social.version>1.1.6.RELEASE</spring-social.version>
-		<javacord.version>3.1.2</javacord.version>
+		<javacord.version>3.7.0</javacord.version>
 	
 	</properties>
 
