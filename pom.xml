@@ -44,10 +44,9 @@
    		</repository>
 	</distributionManagement>
 	
-	<!-- <repositories>
+	<repositories>
 		<repository>
 			<id>github-mixednutz-java-api</id>
-        	<name>GitHub Mixednutz Apache Maven Packages</name>
 			<url>https://maven.pkg.github.com/mixednutz/mixednutz-java-api</url>
 			<releases><enabled>true</enabled></releases>
        		<snapshots><enabled>true</enabled></snapshots>
@@ -58,7 +57,7 @@
 			<releases><enabled>true</enabled></releases>
        		<snapshots><enabled>true</enabled></snapshots>
 		</repository>
-	</repositories> -->
+	</repositories>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
