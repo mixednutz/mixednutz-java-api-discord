@@ -45,14 +45,14 @@
 	</distributionManagement>
 	
 	<repositories>
-		<repository>
+		<!-- <repository>
 			<id>github-mixednutz-java-api</id>
 			<url>https://maven.pkg.github.com/mixednutz/mixednutz-java-api</url>
 			<releases><enabled>true</enabled></releases>
        		<snapshots><enabled>true</enabled></snapshots>
-		</repository>
+		</repository> -->
 		<repository>
-			<id>github-mixednutz-java-api-core</id>
+			<id>github</id>
 			<url>https://maven.pkg.github.com/mixednutz/mixednutz-java-api-core</url>
 			<releases><enabled>true</enabled></releases>
        		<snapshots><enabled>true</enabled></snapshots>
