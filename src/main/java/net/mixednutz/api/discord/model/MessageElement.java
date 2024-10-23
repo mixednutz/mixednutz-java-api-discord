@@ -36,6 +36,7 @@ public class MessageElement extends TimelineElement implements ITimelineElement 
 		this.setPaginationId(message.getIdAsString());
 		this.setDescription(message.getContent());
 		this.setProviderId(message.getIdAsString());
+		this.setReference(message.getIdAsString());
 		this.setUrl(message.getLink().toString());
 		try {
 			this.setUri(message.getLink().toURI().getPath());
