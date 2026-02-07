@@ -77,4 +77,9 @@ public class MessageAdapter extends BaseDiscordAdapter implements PostClient<Mes
 		return Collections.singletonMap("channels", getPostableChannels());
 	}
 
+	@Override
+	public boolean canPost() {
+		return true;
+	}
+
 }
